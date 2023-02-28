@@ -3,5 +3,13 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
-    ]
+    ],
+    "chatgpt.gpt3.apiKey": "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",
+    "chatgpt.gpt3.organization": "",
+    "docwriter.style": "Javadoc",
+    "CodeGPT.query.language": "Spanish",
+    "CodeGPT.model": "code-davinci-002",
+    "docify.commentService.autoTranslationService": "Spanish",
+    "docify.translateService.targetLanguage": "Spanish",
+    "docify.translateService.sourceLanguage": "Spanish"
 }

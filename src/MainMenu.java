@@ -6,7 +6,10 @@ import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Font;
 
-
+/**
+ * Esta clase representa la ventana principal del juego, y es
+ *  responsable de mostrar el menú principal al usuario
+ */
 public class MainMenu extends JFrame implements Runnable {
     public Graphics2D g2;
     public KL keyListener = new KL();
@@ -15,6 +18,7 @@ public class MainMenu extends JFrame implements Runnable {
     public boolean isRunning = true; 
 
     // constructor Window 
+    
     public MainMenu(){
         this.setSize(Constantes.VENTANA_ANCHO, Constantes.VENTANA_LARGO);
         this.setTitle(Constantes.VENTANA_TITULO);
@@ -30,9 +34,16 @@ public class MainMenu extends JFrame implements Runnable {
         g2 = (Graphics2D)getGraphics();
     }
 
+    /**
+     * Este metodo es responsable de actualizar la ventana con la imagen del menú principal y detectar si el usuario ha hecho
+     * clic en uno de los botones.
+     * 
+     * @param dt: el tiempo transcurrido desde la ultima actualización.
+     */
     public void update (double dt){
         Image dbImage = createImage(getWidth(), getHeight());
         Graphics  dbg = dbImage.getGraphics(); 
+        super.update(dbg);
         this.draw(dbg);
         g2.drawImage(dbImage, 0, 0, this);  
 
@@ -60,6 +71,11 @@ public class MainMenu extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Se encarga de dibujar los elementos del menú principal en la ventana. 
+     * 
+     * @param g: Asigna los rectangulos a cada opción.
+     */
     public void  draw (Graphics g) {
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.BLACK);
@@ -71,10 +87,18 @@ public class MainMenu extends JFrame implements Runnable {
         pong.draw(g2);
     
     }
+    /**
+     * En caso de detener el juego se asignará  automaticamente el 'false'
+     */
     public void stop(){
         isRunning = false; 
     }
 
+    /**
+     * Implementa un bucle de juego que llama la metodo 'update', en cada interación, usamos los 
+     * metodos "FPS.getTime()", para calcular el tiempo transcurrido entre las interaciones y asegurar
+     * una tasa de actualización constante 
+     */
     public void run (){
         double frameFinalTiempo = 0.0;
         while (isRunning) {

@@ -1,3 +1,6 @@
+/**
+ * Esta clase define los objetos y el funcionamiento de la pelota para el ping pong.
+ */
 public class Ball {
     public Rect  rect;
     public Rect  leftPaddle, rightPaddle;
@@ -6,17 +9,29 @@ public class Ball {
     private double vx = -150.0;
     // velocity x, y
 
-    public Ball (Rect rect, Rect leftPaddle, Rect righPaddle, Text leftScoreText, Text rightScoreText){
+    /**
+     * Esta constuctor inicializa los valores de la bola dentro del ping pong.
+     * 
+     * @param rect: Representa la posicion y el tamaño de la bola
+     * @param leftPaddle: Representa la paleta izquierda
+     * @param rightPaddle: Representa la paleta izquierda
+     * @param leftScoreText: Nos representa la puntuación por la izquierda
+     * @param rightScoreText: Nos representa la puntuación por la derecha
+     */
+    public Ball (Rect rect, Rect leftPaddle, Rect rightPaddle, Text leftScoreText, Text rightScoreText){
         this.rect = rect;
         this.leftPaddle = leftPaddle;
-        this.rightPaddle = righPaddle;
+        this.rightPaddle = rightPaddle;
         this.leftScoreText = leftScoreText;
         this.rightScoreText = rightScoreText;
 
     }
-    
-    
 
+    /**
+     * Este metodo calcula el ángulo de reflexión de la bola cuando golpea una paleta
+     * @param paddle: Tenemos la pisición de la pelota
+     * @return: EL angulo de la pelota al rebotar
+     */
     public double calculateNewVelocityAngle (Rect paddle){
         double relativeIntersectY = (paddle.y + (paddle.height /2.0)) - (this.rect.y + (this.rect.height / 2.0));
         double normalIntersectY = relativeIntersectY / (paddle.height / 2.0);
@@ -26,6 +41,12 @@ public class Ball {
 
     
 
+    /**
+     * Este metodo actualiza la posición de la bola en funcion de su velocidad detectando 
+     * la colisión con las paletas y los limites de la pantalla.
+     * 
+     * @param dt: el tiempo transcurrido desde la ultima actualización, o la velocidad que adquiere la pelota.
+     */
     public void update (double dt){
         if (vx < 0 ){
             if (this.rect.x <= this.leftPaddle.x + this.leftPaddle.width && this.rect.x + this.rect.width >= this.leftPaddle.x &&
@@ -75,7 +96,7 @@ public class Ball {
             rightScore++;
             rightScoreText.text = "" + rightScore; 
             this.rect.x = Constantes.VENTANA_ANCHO / 2.0;
-            this.rect.x = Constantes.VENTANA_LARGO / 2.0;
+            this.rect.y = Constantes.VENTANA_LARGO / 2.0;
             this.vx = -150.0;
             this.vy = 10.0;
             if (rightScore == Constantes.WIN_SCORE){
@@ -88,7 +109,7 @@ public class Ball {
             leftScore++;
             leftScoreText.text = "" + leftScore; 
             this.rect.x = Constantes.VENTANA_ANCHO / 2.0;
-            this.rect.x = Constantes.VENTANA_LARGO / 2.0;
+            this.rect.y = Constantes.VENTANA_LARGO / 2.0;
             this.vx = 10;
             this.vy = -150.0;
             if (leftScore == Constantes.WIN_SCORE){

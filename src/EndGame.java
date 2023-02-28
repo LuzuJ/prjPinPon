@@ -5,6 +5,10 @@ import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.Font;
 
+/**
+ * Esta clase es responsable de crear la pantalla cuando el juego termina, a su vez enseña dos posibles
+ * opciones que son: "TRY AGAIN" y "EXIT GAME"
+ */
 public class EndGame extends JFrame implements Runnable{
 
     public Graphics2D g2;
@@ -13,6 +17,11 @@ public class EndGame extends JFrame implements Runnable{
     public Text tryAgain, exitGame2;  
     public boolean isRunning = true; 
    
+   /**
+    * En este constructor se establece el tamaño y el titulo de la ventada, se hace visible y se establece que al cerrar 
+    * la ventana el programa termine, así mismo detecta los eventos del teclado y del mouse respectivamente. 
+    * El objeto "text" esta creado para cada opción que se muestre en pantalla y se establecen sus propiedades como fuente, posicion y color. 
+    */ 
     public EndGame (){
         this.setSize(Constantes.VENTANA_ANCHO, Constantes.VENTANA_LARGO);
         this.setTitle(Constantes.VENTANA_TITULO);
@@ -26,6 +35,13 @@ public class EndGame extends JFrame implements Runnable{
         this.exitGame2 = new Text("Exit Game", new Font ("Times New Roman", Font.PLAIN,  40), new Color(50, 50, 255), Constantes.VENTANA_ANCHO / 2.0 - 70.0, Constantes.VENTANA_LARGO / 2.0 + 60, Color.WHITE);
         g2 = (Graphics2D)getGraphics();
     }
+    /**
+     * Este metodo crea una imagen de doble búder para evitar el parpadeo al actualizar la pantalla. Luego dibuja el "Try Again" y "Exit Game" en la pantalla.
+     * Así mismo si el mouse se encuentra sobre algunas de las opciones, su color cambia.
+     * "Try Again": Reinicia el juego
+     * "Exit game": Cierra el juego
+     * @param dt: el tiempo transcurrido desde la ultima actualización.
+     */
     public void update (double dt){
         Image dbImage = createImage(getWidth(), getHeight());
         Graphics  dbg = dbImage.getGraphics(); 
@@ -56,6 +72,11 @@ public class EndGame extends JFrame implements Runnable{
         }
     }
 
+    /**
+     * Este método dibuja un rectángulo negro en toda la pantalla y se dibuja las opciones "Try Again", "Exit Game"
+     * 
+     * @param g: Asigna los rectangulos a cada opción
+     */
     public void  draw (Graphics g) {
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.BLACK);
@@ -67,10 +88,18 @@ public class EndGame extends JFrame implements Runnable{
        
     
     }
+    /**
+     * Este metodo cambia la variable a 'false', lo que detiene el ciclo del programa en el metodo "run"
+     */
     public void stop(){
         isRunning = false; 
     }
 
+    /**
+     * Este metodo, por cada interación calcula el tiempo transcurrido desde la última interación
+     * y llamamos al metodo "update", con ese valor de tiepo. Luego dibuja la pantalla y se espera hasta el 
+     * siguiente fotograma. Cuando se detiene le ciclo principal, se elimina la ventama de la pantalla y el método retorna.
+     */
     public void run (){
         double frameFinalTiempo = 0.0;
         while (isRunning) {

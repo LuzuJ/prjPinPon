@@ -1,3 +1,11 @@
+/**
+ * Esta clase contiene el metodo main del juego de pin pon
+ * 
+ * @author: Grupo 4: Luna Said - Jonathan Luzuriaga - Anthony Morales - Daniela Molina - Daniel Moncayo
+ * 
+ */
+
+
 public class App {
     public static int state = 0;
     public static Thread mainThread;
@@ -16,7 +24,7 @@ public class App {
     public static void changeState(int newState) {
         boolean stateBucle = true; // inicializar a true para asegurar que entre al bucle al menos una vez
     
-        while (stateBucle) {
+        //while (stateBucle) {
             switch (newState) {
                 case 0:
                     if (state == 1) {
@@ -28,7 +36,7 @@ public class App {
                     mainThread = new Thread(menu);
                     mainThread.start();
                     state = 0;
-                    stateBucle = false;
+                    //stateBucle = false;
                     break;
                 case 1:
                     if (state == 0) {
@@ -38,7 +46,7 @@ public class App {
                     mainThread = new Thread(window);
                     mainThread.start();
                     state = 1;
-                    stateBucle = false;
+                    //stateBucle = false;
                     break;
                 case 2:
                     if (endScreen != null) {
@@ -48,7 +56,7 @@ public class App {
                         menu.stop();
                     }
                     state = 2;
-                    stateBucle = false;
+                   // stateBucle = false;
                     break;
                 case 3:
                     if (window != null) {
@@ -57,7 +65,7 @@ public class App {
                         endThread = new Thread(endScreen);
                         endThread.start();
                         state = 1;
-                        stateBucle = false;
+                        //stateBucle = false;
                     }
                     break;
                 case 4:
@@ -65,9 +73,9 @@ public class App {
                         endScreen.stop();
                     }
                     newState = 0;
-                    stateBucle = false;
+                    //stateBucle = false;
                     break;
             }
-        }
+        //}
     }
 }

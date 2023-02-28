@@ -1,5 +1,8 @@
+/**
+ * La clase constante se utiliza para definir objetos que no cambian después de su creación.
+ */
 import java.awt.Color;
-// La clase constante se utiliza para definir objetos que no cambian después de su creación.
+
 public class Constantes {
 public static final int VENTANA_ANCHO  = 800;
 public static final int VENTANA_LARGO = 600;
